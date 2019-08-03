@@ -48,7 +48,7 @@ contract Streams {
         uint256 requestId;
         uint256 pricePerHour;
         uint256 maxTimeLimit;
-        uint64 withdrawTime;
+        uint256 withdrawTime;
         bool isCompleted;
     }
 
@@ -86,7 +86,8 @@ contract Streams {
         uint256 cost = _pricePerHour * _maxTimeLimit;
         // ! TODO see if you can optimise this computation or get it off the chain
         require(
-            msg.value == cost + ( 100 * cost ) / 1000,
+             msg.value == cost,
+            // msg.value == cost + ( 100 * cost ) / 1000,
             // msg.value == cost + 0.01 * cost,
             "Please check if sufficient funds are being locked."
         );
@@ -123,7 +124,7 @@ contract Streams {
             pricePerHour: _pricePerHour,
             maxTimeLimit: _maxTimeLimit,
             // set the time after which the withdrawal of the fees is valid
-            withdrawTime: uint64(now + _maxTimeLimit * 86400),
+            withdrawTime: now + _maxTimeLimit * 86400,
             isCompleted: false
         });
 
@@ -138,7 +139,7 @@ contract Streams {
         Stream storage stream = streams[_streamId];
         require(
             stream.withdrawTime > now,
-            "Cannot withdraw before stream ends"
+            "Cannot withdraw before stream ends - more"
         );
         // make sure that his hasn't been marked as completed before
         require(

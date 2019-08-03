@@ -1377,12 +1377,12 @@
     "1564773170076": {
       "events": {},
       "links": {},
-      "address": "0x9c0F779397F58C0971d49a2F2102f31b8dA2Bebd",
-      "transactionHash": "0x4d41b0331f3813552706b104f1e148a64c6f6bb56028a3bb5fc21f5d6271f9fe"
+      "address": "0xb8d2dC0757f6017166E7e4E3bb8C154ed0dFf970",
+      "transactionHash": "0x4bab3059f7c0a249420e228e55a81834e3c6fcccaaaddd2ce80e367b21dc2061"
     }
   },
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-08-03T06:11:50.527Z",
+  "updatedAt": "2019-08-03T09:20:10.091Z",
   "devdoc": {
     "methods": {}
   },
