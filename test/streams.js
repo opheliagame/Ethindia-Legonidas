@@ -3,17 +3,24 @@ const Streams = artifacts.require('../contracts/Streams.sol');
 contract('Streams', async accounts => {
   let streamsInstance;
 
-  // const account0 = '0x3B7806E722de6f57B4B5278ffb711f47AF3694dD';
-  // const account1 = '0xe5ee357eC4c28d0Fc00EF98957b47598D7eD1961';
   const account0 = accounts[0];
   const account1 = accounts[1];
   console.log(accounts[0]);
 
-  const pph = 1000000000000000;
+  const pph = 1e14;
+
+  const value = pph + pph * 0.51;
 
   it('initializes', async () => {
     streamsInstance = await Streams.deployed();
   });
+
+  // it('logs the balance of the test accounts', async () => {
+  //   const b1 = await web3.eth.getBalance(account0);
+  //   const b2 = await web3.eth.getBalance(account1);
+  //   console.log(b1);
+  //   console.log(b2);
+  // });
 
   it('creates 2 new people', async () => {
     try {
@@ -36,7 +43,7 @@ contract('Streams', async accounts => {
     try {
       await streamsInstance.createSkillRequest('coding', 'code', pph, 1, 0, {
         from: account0,
-        value: pph
+        value
       });
       const skill = await streamsInstance.skillRequests(0);
       assert.equal(skill['skill'], 'coding', 'skill field is inconsistent');
@@ -88,10 +95,10 @@ contract('Streams', async accounts => {
       var wait = ms => new Promise((r) => setTimeout(r, ms))
       await streamsInstance.createSkillRequest('test2', 'test2-desc', pph, 1, 0, {
         from: account0,
-        value: pph
+        value
       });
       await streamsInstance.acceptSkillRequest(1, 1, {
-        'from': account1
+        from: account1
       });
       await wait(3000);
       await streamsInstance.completeStream(1, {
@@ -110,6 +117,31 @@ contract('Streams', async accounts => {
       assert.fail('The completeStream function call executed! :(');
     } catch (err) {
       assert.equal(err.message, 'Returned error: VM Exception while processing transaction: revert This transaction has already been completed -- Reason given: This transaction has already been completed.', 'Incorrect error');
+    }
+  });
+
+  it('returns the collateral when the corresponding function is invoked', async () => {
+    try {
+      const wait = ms => new Promise((r) => setTimeout(r, ms));
+      const ib0 = await web3.eth.getBalance(account0);
+      const ib1 = await web3.eth.getBalance(account1);
+      await streamsInstance.createSkillRequest('test3', 'test3-desc', pph, 1, 0, {
+        from: account0,
+        value
+      });
+      await streamsInstance.acceptSkillRequest(2, 1, {
+        'from': account1
+      });
+      await wait(3000);
+      await streamsInstance.completeStreamWithCollateralPayout(2, {
+        from: account1
+      });
+      const fb0 = await web3.eth.getBalance(account0);
+      const fb1 = await web3.eth.getBalance(account1);
+      console.log(`Account 0 (mentee) - Initial ${ib0} to final ${fb0}`);
+      console.log(`Account 1 (mentor) - Initial ${ib1} to final ${fb1}`);
+    } catch (err) {
+      throw err;
     }
   });
 });

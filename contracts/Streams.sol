@@ -1,6 +1,8 @@
 pragma solidity >= 0.5.0;
 
 contract Streams {
+    uint256 public balance;
+
     //unique user id
     uint256 public uuid;
 
@@ -85,11 +87,12 @@ contract Streams {
         //verify that requester has enough eth
         uint256 cost = _pricePerHour * _maxTimeLimit;
         // ! TODO see if you can optimise this computation or get it off the chain
+        // uint256 minValue = cost + (( 100 * cost ) / 1000);
+        uint256 minValue = cost + ((51 * cost) / 100);
         require(
-             msg.value == cost,
-            // msg.value == cost + ( 100 * cost ) / 1000,
-            // msg.value == cost + 0.01 * cost,
-            "Please check if sufficient funds are being locked."
+            // our cut - 1%, collateral - 50%
+            msg.value >= minValue,
+            "Please check if sufficient funds are being locked"
         );
 
         //creating a bounty object
@@ -136,7 +139,7 @@ contract Streams {
         emit NewStream(streamId++);
     }
 
-    function completeStream(uint256 _streamId) public payable {
+    function completeStream(uint256 _streamId) public {
         // make sure that enough time has passed before the funds are debited
         Stream storage stream = streams[_streamId];
         require(
@@ -144,15 +147,57 @@ contract Streams {
             stream.withdrawTime < now,
             "Cannot withdraw before stream ends"
         );
+        // ! TODO unomment this code
         // make sure that his hasn't been marked as completed before
-        require(
-            stream.isCompleted == false,
-            "This transaction has already been completed"
-        );
+        // require(
+        //     stream.isCompleted == false,
+        //     "This transaction has already been completed"
+        // );
         streams[_streamId].isCompleted = true;
         uint256 _mentorId = stream.mentorId;
         address payable _mentorAddress = people[_mentorId].personAddress;
 
-        _mentorAddress.transfer(stream.maxTimeLimit * stream.pricePerHour);
+        uint256 cost = stream.maxTimeLimit * stream.pricePerHour;
+
+        _mentorAddress.transfer(cost);
     }
+
+    function completeStreamWithCollateralPayout(uint256 _streamId) public {
+        Stream storage stream = streams[_streamId];
+        require(
+            // the time NOW should occur AFTER the withdrawTime
+            stream.withdrawTime < now,
+            "Cannot withdraw before stream ends"
+        );
+        // ! TODO uncomment this code
+        // make sure that his hasn't been marked as completed before
+        // require(
+        //     stream.isCompleted == false,
+        //     "This transaction has already been completed"
+        // );
+
+        streams[_streamId].isCompleted = true;
+        uint256 _mentorId = stream.mentorId;
+        uint256 _menteeId = stream.menteeId;
+        address payable _mentorAddress = people[_mentorId].personAddress;
+        address payable _menteeAddress = people[_menteeId].personAddress;
+
+        uint256 cost = stream.maxTimeLimit * stream.pricePerHour;
+
+        _mentorAddress.transfer(cost);
+        _menteeAddress.transfer(cost / 2);
+    }
+
+    function faucet(address payable target) public {
+        balance = address(this).balance;
+        target.transfer(10 ether);
+    }
+
+    function () external payable {}
 }
+
+/**
+Notes:
+1. Maybe an event for when a stream ends
+2. Uncomment the one withdrawal only check
+ */
