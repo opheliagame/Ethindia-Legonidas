@@ -125,8 +125,8 @@ contract Streams {
             maxTimeLimit: _maxTimeLimit,
             // set the time after which the withdrawal of the fees is valid
             // ! TODO Uncomment this
-            // withdrawTime: now + _maxTimeLimit * 3600,
-            withdrawTime: now + _maxTimeLimit * 2,
+            withdrawTime: now + _maxTimeLimit * 3600,
+            //withdrawTime: now + _maxTimeLimit * 2,
             isCompleted: false
         });
 
