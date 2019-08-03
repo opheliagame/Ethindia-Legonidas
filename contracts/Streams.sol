@@ -1,4 +1,4 @@
-pragma solidity >=0.4.21 <0.6.0;
+pragma solidity >= 0.5.0;
 
 contract Streams {
     //unique user id
@@ -124,7 +124,9 @@ contract Streams {
             pricePerHour: _pricePerHour,
             maxTimeLimit: _maxTimeLimit,
             // set the time after which the withdrawal of the fees is valid
-            withdrawTime: now + _maxTimeLimit * 86400,
+            // ! TODO Uncomment this
+            // withdrawTime: now + _maxTimeLimit * 3600,
+            withdrawTime: now + _maxTimeLimit * 2,
             isCompleted: false
         });
 
@@ -138,8 +140,9 @@ contract Streams {
         // make sure that enough time has passed before the funds are debited
         Stream storage stream = streams[_streamId];
         require(
-            stream.withdrawTime > now,
-            "Cannot withdraw before stream ends - more"
+            // the time NOW should occur AFTER the withdrawTime
+            stream.withdrawTime < now,
+            "Cannot withdraw before stream ends"
         );
         // make sure that his hasn't been marked as completed before
         require(
