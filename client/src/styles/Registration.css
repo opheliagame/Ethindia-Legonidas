@@ -1,0 +1,66 @@
+/* Add styles for Registration component */
+html, body, .registration {
+    background: #f1f9ff;
+}
+
+html, body, #root, .registration {
+    height: 100%;
+    color: #2699fb;
+}
+
+.registration .container .row{
+    padding: 24px;
+}
+
+.registration .container .row {
+    margin-top: 0px;
+}
+
+.registration .container .row h2{
+    font-size: 40px;
+    padding-left: 24px;
+}
+
+.btn-large {
+    background: #2699fb;
+}
+
+#left-column {
+    background: white;
+}
+
+#right-column {
+    background: #f1f9ff; 
+}
+
+textarea.materialize-textarea {
+    height: 10rem;
+    color: #2699fb;
+    border: 1px solid #2699fb;
+    padding: 10px;
+    outline: none;
+    overflow: auto;
+    transition: none;
+}
+
+textarea {
+    transition: none;
+}
+
+select option{
+    outline: none;
+    appearance: none;
+    border-radius: 5px;
+    color: white;
+}
+
+
+
+.btn-small {
+    border-radius: 50%;
+    background: white;
+    color: #2699fb;
+}
+
+
+
