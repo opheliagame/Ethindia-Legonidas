@@ -154,6 +154,5 @@ contract Streams {
         address payable _mentorAddress = people[_mentorId].personAddress;
 
         _mentorAddress.transfer(stream.maxTimeLimit * stream.pricePerHour);
-
     }
 }

@@ -102,14 +102,14 @@ contract('Streams', async accounts => {
     }
   });
 
-  // it('fails to allow a person to withdraw his/her fees twice', async () => {
-  //   try {
-  //     await streamsInstance.completeStream(1, {
-  //       from: account1
-  //     });
-  //     assert.fail('The completeStream function call executed! :(');
-  //   } catch (err) {
-  //     assert.equal(err.message, 'This transaction has already been completed', 'Incorrect error');
-  //   }
-  // });
+  it('fails to allow a person to withdraw his/her fees twice', async () => {
+    try {
+      await streamsInstance.completeStream(1, {
+        from: account1
+      });
+      assert.fail('The completeStream function call executed! :(');
+    } catch (err) {
+      assert.equal(err.message, 'Returned error: VM Exception while processing transaction: revert This transaction has already been completed -- Reason given: This transaction has already been completed.', 'Incorrect error');
+    }
+  });
 });
