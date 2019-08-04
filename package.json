@@ -1,8 +1,11 @@
 {
-  "name": "ethindia",
+  "name": "Ethindia-Legonidas",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Steps done till now:",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,14 +13,11 @@
     "type": "git",
     "url": "git+https://github.com/opheliagame/Ethindia-Legonidas.git"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/opheliagame/Ethindia-Legonidas/issues"
   },
-  "homepage": "https://github.com/opheliagame/Ethindia-Legonidas#readme",
-  "dependencies": {
-    "history": "^4.9.0",
-    "react-router-dom": "^5.0.1"
-  }
+  "homepage": "https://github.com/opheliagame/Ethindia-Legonidas#readme"
 }

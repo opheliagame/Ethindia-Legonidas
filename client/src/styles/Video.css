@@ -46,6 +46,7 @@
     width:210px;
     height:147px;
     display:inline-block;
+<<<<<<< HEAD
     background-color: black;
 }
 
@@ -96,4 +97,6 @@
     margin: 0 auto;
     background: rgba(255, 255, 255, .1);
     /* border-radius: 12px; */
+=======
+>>>>>>> bcaf3092c57d7f6361fd2b3557a0ec12b1a6d98b
 }
