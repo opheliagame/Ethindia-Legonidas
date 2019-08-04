@@ -18,11 +18,7 @@ class VideoSidePane extends Component {
 
                 {/* Student Name */}
                 <div className="col 12">
-<<<<<<< HEAD
                     <p className="sidepane-category white-text">STUDENT NAME:</p>
-=======
-                    <p className="sidepane-category white-text">MENTOR NAME:</p>
->>>>>>> bcaf3092c57d7f6361fd2b3557a0ec12b1a6d98b
                     <p className="sidepane-value white-text"><b>{this.props.studentName}</b></p>
                 </div>
 

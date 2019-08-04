@@ -23,11 +23,7 @@ class Video extends Component {
     // Get the IDS
     getVideoDetails = () => {
         // Replace by code to get the video details
-<<<<<<< HEAD
         const channelId = "GoodBoiz";
-=======
-        const channelId = uuidv1();
->>>>>>> bcaf3092c57d7f6361fd2b3557a0ec12b1a6d98b
         const mentorName = "James Bond";
         const studentName = "John Cena";
         const topic = "How to learn calculus";
