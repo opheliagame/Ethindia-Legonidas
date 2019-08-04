@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { Component } from "react";
 import StreamsContract from "./contracts/Streams.json";
 import getWeb3 from "./utils/getWeb3";
@@ -131,23 +130,6 @@ class App extends Component {
       </div>
     );
   }
-=======
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/free-brands-svg-icons'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
-library.add(fas, faPlus)
-
-function App() {
-	return (
-		<div className="App">
-			This is App.js
-		</div>
-	);
->>>>>>> 08dbbec8d8e0fcd5ce5964071c3741982377dcd7
 }
 
 export default App;

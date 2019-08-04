@@ -1,1 +1,105 @@
 /* Add styles for Feed component */
+.feed-super-container {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #F1F9FF;
+    color: #2699FB;
+}
+
+.feed-sidepane-container {
+    height: 100vh;
+    background-color: #FFFFFF;
+    /* position: relative; */
+    padding: 20px !important;
+}
+
+.feed-sidepane-row {
+    /* padding-left: 10px !important;
+    padding-right: 10px !important; */
+    
+}
+
+.feed-make-full-width  {
+    /* width: 100%; */
+}
+
+.zero-pad  {
+    padding: 0;
+}
+
+.feed-sidepane-inner-container {
+
+    /* position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%); */
+    margin: 0 auto;
+}
+
+.align-center {
+    /* text-align: center !important; */
+}
+
+#personal-information {
+    font-size: 12px;
+    font-weight: 900;
+}
+
+#main-name {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 28px;
+    line-height: 24px;
+    font-weight: 600;
+    margin-bottom: 0;;
+}
+
+#star-rating {
+    margin-top: 0;
+    font-size: 12px;
+}
+
+#skills-top {
+    font-size: 18px;
+    line-height: 10px;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+#skills-value {
+    margin-top: 0;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+#main-about {
+    text-align: justify !important;
+}
+
+.timeline-container {
+    height: 100vh;
+    overflow-y: scroll;
+    padding: 32px;
+}
+
+.accept-offer-btn  {
+    font-size: 12px;
+    margin: 0 !important;
+}
+
+.minus-margini-top {
+    margin-top: 7px;
+}
+
+#textarea1 {
+    padding: 10px !important;
+}
+
+.zero-margin {
+    margin: 0;
+}
+
+.remove-bottom-pad  {
+    padding-bottom: 0 !important;
+}
