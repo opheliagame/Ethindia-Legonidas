@@ -16,12 +16,52 @@ class Video extends Component {
         sessionDetails: null
     }
 
-    componentDidMount () {
-        this.getVideoDetails ();
-    }
+    componentDidMount = async () => {
+            try {
+                document.addEventListener('DOMContentLoaded', function () {
+                    var elems = document.querySelectorAll('select');
+                    var instances = M.FormSelect.init(elems);
+                });
+
+                this.getVideoDetails();
+
+                // Get network provider and web3 instance.
+                const web3 = await getWeb3();
+
+                // Use web3 to get the user's accounts.
+                const accounts = await web3.eth.getAccounts();
+
+                // Get the contract instance.
+                const networkId = await web3.eth.net.getId();
+                const deployedNetwork = StreamsContract.networks[networkId];
+                const instance = new web3.eth.Contract(
+                    StreamsContract.abi,
+                    deployedNetwork && deployedNetwork.address,
+                );
+
+                // Set web3, accounts, and contract to the state, and then proceed with an
+                // example of interacting with the contract's methods.
+                this.setState({
+                    web3,
+                    accounts,
+                    contract: instance
+                }, this.runInit);
+            } catch (error) {
+                // Catch any errors for any of the above operations.
+                alert(
+                    `Failed to load web3, accounts, or contract. Check console for details.`,
+                );
+                console.error(error);
+            }
+
+        }
 
     // Get the IDS
-    getVideoDetails = () => {
+    async getVideoDetails () {
+        // const { accounts, contract } = this.state;
+        // await contract.methods
+        //     .acceptSkillRequest()
+
         // Replace by code to get the video details
         const channelId = "GoodBoiz";
         const mentorName = "James Bond";
@@ -62,7 +102,6 @@ class Video extends Component {
     // Check whether it is meeting time
 
     render () {
-        console.log ('MENTOR NAMEEEEEE- ', this.state.mentorName);
         return (
             <div>
             {
@@ -90,7 +129,7 @@ class Video extends Component {
                     : <div>Loading</div>
             }
             </div>
-        );
+        )
     }
 }
 
