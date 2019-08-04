@@ -33,6 +33,62 @@ const Post = (props) => {
 }
 
 class Timeline extends Component { 
+    constructor(props) {
+        super(this.props);
+        this.handleNewRequest = this.handleNewRequest.bind(this);
+
+    }
+
+    componentDidMount = async() => {
+        try {  
+          // Get network provider and web3 instance.
+          const web3 = await getWeb3();
+    
+          // Use web3 to get the user's accounts.
+          const accounts = await web3.eth.getAccounts();
+    
+          // Get the contract instance.
+          const networkId = await web3.eth.net.getId();
+          const deployedNetwork = StreamsContract.networks[networkId];
+          const instance = new web3.eth.Contract(
+            StreamsContract.abi,
+            deployedNetwork && deployedNetwork.address,
+          );
+    
+          // Set web3, accounts, and contract to the state, and then proceed with an
+          // example of interacting with the contract's methods.
+          this.setState({ web3, accounts, contract: instance }, this.runInit);
+        } catch (error) {
+          // Catch any errors for any of the above operations.
+          alert(
+            `Failed to load web3, accounts, or contract. Check console for details.`,
+          );
+          console.error(error);
+        }
+    
+    }
+
+    runInit = async() => {
+        const { accounts, contract } = this.state;
+    }
+
+    async handleNewRequest(e) {
+        e.preventDefault();
+        console.log('handler');
+        const description = e.target.description.value;
+        const pricePerHour = e.target.pricePerHour.value;
+        const maxTimeLimit = e.target.maxTimeLimit.value;
+
+        if(description != '' && pricePerHour != '' && maxTimeLimit != '') {
+            await this.
+        } else {
+            alert('Please fill all the fields.');
+        }
+    }
+
+
+
+
     render () {
         return (
             <div className="timeline-container">
@@ -54,23 +110,23 @@ class Timeline extends Component {
                                         </div>
                                     </div>
 
-                                    <form className="col s12">
+                                    <form className="col s12" onSubmit={this.handleNewRequest}>
                                         <div className="row">
                                             <div className="zero-margin input-field col s12">
-                                                <textarea id="textarea1" className="zero-margin materialize-textarea" placeholder="Enter the requirements"></textarea>
+                                                <textarea name="description" id="textarea1" className="zero-margin materialize-textarea" placeholder="Enter the requirements"></textarea>
                                             </div>
 
                                             <div class="zero-margin input-field col s6">
-                                                <input id="bounty" type="text" class="validate" />
+                                                <input name="pricePerHour" id="bounty" type="text" class="validate" />
                                                 <label for="bounty">Enter Bounty/hour</label>
                                             </div>
                                             <div class="zero-margin input-field col s6">
-                                                <input id="num-hours" type="tel" class="validate" />
+                                                <input name="maxTimeLimit" id="num-hours" type="tel" class="validate" />
                                                 <label for="num-hours">Number of Hours</label>
                                             </div>
 
                                             <div style={{marginTop: "10px"}} className="col s12">
-                                                <a className="accept-offer-btn waves-effect waves-light btn ">Request Service</a>
+                                                <button className="accept-offer-btn waves-effect waves-light btn " type="submit">Request Service</button>
                                             </div>
                                         </div>
                                     </form>

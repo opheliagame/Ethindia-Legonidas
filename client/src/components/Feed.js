@@ -64,6 +64,9 @@ class Feed extends Component {
                 key: 7
             }, 
         ]
+
+
+
         this.setState ({
             ...this.state,
             prevPosts

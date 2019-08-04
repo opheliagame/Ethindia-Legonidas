@@ -83,6 +83,10 @@ class Registration extends Component {
 
         
 
+        let localStorage = window.localStorage;
+        localStorage.setItem("isRegistered", true);
+        document.location.reload()
+
         
 
 
