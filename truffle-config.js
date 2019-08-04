@@ -17,6 +17,12 @@ module.exports = {
      network_id: "*",       // Any network (default: none)
     },
 
+    matic: {
+      host: "https://testnet2.matic.network",
+      port: 8545,
+      network_id: "*",
+    },
+
     // Another network with more advanced options...
     // advanced: {
       // port: 8777,             // Custom port

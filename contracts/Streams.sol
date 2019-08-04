@@ -68,13 +68,17 @@ contract Streams {
     );
 
     // ! TODO augment to integrate skills
-    function createNewPerson(string memory _name) public {
+    function createNewPerson(string memory _name, string memory _skill1, string memory _skill2, string memory _skill3) public {
         Person memory newPerson = Person({
             personAddress: msg.sender,
             name: _name,
             skills: new string[](3),
             rating: uint8(3)
         });
+
+        newPerson.skills[0] = _skill1;
+        newPerson.skills[1] = _skill2;
+        newPerson.skills[2] = _skill3;
 
         people[uuid] = newPerson;
 
